@@ -1,0 +1,13 @@
+name = "Osborne"
+uuid = "5a887ad5-6ddf-431f-84a0-763c7e571a35"
+authors = ["Francisco Munguia-Wulftange"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.10"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]

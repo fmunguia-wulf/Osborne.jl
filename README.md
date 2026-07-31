@@ -27,5 +27,5 @@ julia> EFIT.geqdsk2imas!([g], dd; add_derived=true);
 
 julia> Osborne.pfile2imas!(p, dd; gfile=g);
 
-julia> dd.core_profiles.profiles_1d[].electrons.temperature
+julia> plot(dd.core_profiles) # new data lives in dd.core_profiles
 ```

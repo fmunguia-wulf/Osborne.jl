@@ -28,7 +28,7 @@ function pfile2imas!(p::PFile, dd::IMASdd.dd; gfile::Union{EFIT.GEQDSKFile,Nothi
     # helper: interpolate pfile psinorm onto equilibrium rho_tor_norm grid
     function psin2rho(psin_arr::Vector{Float64})
         clamped = clamp.(psin_arr, minimum(psin_eq), maximum(psin_eq))
-        return linear_interp(psin_eq, rhotn_eq, clamped)
+        return linear_interp(psin_eq, rhotn_eq, clamped; extrap=FastInterpolations.ClampExtrap())
     end
 
     # Regrid in rho-space, not psinorm-space (OMFITpFile.remap()'s own
@@ -50,7 +50,7 @@ function pfile2imas!(p::PFile, dd::IMASdd.dd; gfile::Union{EFIT.GEQDSKFile,Nothi
         rho = psin2rho(prof.psinorm[idx])
         vals = fac .* prof.data[idx]
         clamped_target = clamp.(rho_target, minimum(rho), maximum(rho))
-        return rho_target, linear_interp(rho, vals, clamped_target)
+        return rho_target, linear_interp(rho, vals, clamped_target; extrap=FastInterpolations.ClampExtrap())
     end
 
     dd.global_time = p.time

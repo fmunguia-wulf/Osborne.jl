@@ -53,11 +53,14 @@ function pfile2imas!(p::PFile, dd::IMASdd.dd; gfile::Union{EFIT.GEQDSKFile,Nothi
         return rho_target, linear_interp(rho, vals, clamped_target; extrap=FastInterpolations.ClampExtrap())
     end
 
-    dd.global_time = p.time
+    # set target time from the user input dd
+    time_target = !isempty(dd.equilibrium.time) ? dd.equilibrium.time[end] : p.time
 
-    resize!(dd.core_profiles.profiles_1d)
-    cp1d = dd.core_profiles.profiles_1d[]
-    cp1d.time = p.time
+    dd.global_time = time_target
+
+    resize!(dd.core_profiles.profiles1d)
+    cp1d = dd.core_profiles.profiles1d[]
+    cp1d.time = time_target
 
     cp1d.grid.rho_tor_norm = rho_target
 

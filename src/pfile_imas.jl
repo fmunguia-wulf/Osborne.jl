@@ -59,7 +59,7 @@ function pfile2imas!(p::PFile, dd::IMASdd.dd; gfile::Union{EFIT.GEQDSKFile,Nothi
     dd.global_time = time_target
 
     resize!(dd.core_profiles.profiles_1d)
-    cp1d = dd.core_profiles.profiles1d[]
+    cp1d = dd.core_profiles.profiles_1d[]
     cp1d.time = time_target
 
     cp1d.grid.rho_tor_norm = rho_target

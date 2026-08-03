@@ -126,10 +126,7 @@ function pfile2imas!(p::PFile, dd::IMASdd.dd; gfile::Union{EFIT.GEQDSKFile,Nothi
             _, vals = get_prof("vpol1", 1e3)
             cp1d.ion[mk].velocity.poloidal = vals
         end
-        # sonic2ωtor! applies the diamagnetic correction (not equal to
-        # rotation_frequency_tor_sonic); populated explicitly since
-        # ActorFluxMatcher's replay step requires hasdata(), which a
-        # dynamic expression alone doesn't satisfy.
+        # sonic2ωtor! to be consistent using IMAS routines
         if haskey(p.profiles, "omgeb")
             IMAS.sonic2ωtor!(cp1d, cp1d.ion[mk])
         end

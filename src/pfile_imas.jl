@@ -7,10 +7,8 @@ OMFITpFile.to_omas()), mapping psinorm -> rho_tor_norm via gfile.rhovn.
 If `gfile` is omitted, falls back to dd.equilibrium.time_slice[]'s own
 psi_norm/rho_tor_norm mapping.
 
-`rho_target` sets the output grid. If omitted: reuses dd's own pre-existing
-core_profiles grid if present (so the result matches ActorReplay.replay_dd's
-length requirement automatically), else defaults to a 129-point grid.
 """
+
 function pfile2imas!(p::PFile, dd::IMASdd.dd; gfile::Union{EFIT.GEQDSKFile,Nothing}=nothing, rho_target::Union{Nothing,AbstractVector{<:Real}}=nothing)
 
     if gfile !== nothing
